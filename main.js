@@ -34,6 +34,13 @@
 
         const button = document.createElement('button');
         button.textContent = 'X';
+        button.addEventListener('click', () => {
+            if (!confirm('Sure?')) { //!をつけることでfalse時に実行されるif文となる
+                return;
+            };
+            // ボタン押下時、li要素(todo)ごと削除
+            li.remove();
+        })
 
         const li = document.createElement('li');
         li.appendChild(label);
