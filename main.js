@@ -3,9 +3,10 @@
 {
     //todo自体を配列に、ここの配列はtitleとcheckの有無をobjectに
     const todos = [
-        { title: 'aaa', isCompleted: false },
-        { title: 'bbb', isCompleted: false },
+        { title: 'aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa', isCompleted: false },
+        { title: 'bbb', isCompleted: true },
         { title: 'ccc', isCompleted: false },
+        { title: 'ddd', isCompleted: false },
     ];
 
     const renderTodo = (todo) => {
@@ -39,7 +40,7 @@
         li.appendChild(button);
 
         document.querySelector('#todos').appendChild(li);
-        
+
     };
 
 
@@ -48,6 +49,17 @@
             renderTodo(todo);
         });
     };
+
+    document.querySelector('#add-form').addEventListener('submit', (e) => {
+        // formをsubmitしてしまうとデフォルトでリロードされてしまうため、preventDefault()で打ち消し
+        e.preventDefault();
+        const todo = {
+            // フォーム内のvalue要素をtodoオブジェクトのtitleプロパティに
+            title: document.querySelector('#add-form input').value,
+            isCompleted: false,
+        };
+        renderTodo(todo);
+    });
 
     renderTodos();
 }

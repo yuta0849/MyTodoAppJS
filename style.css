@@ -36,10 +36,19 @@ li {
     align-items: flex-start;
     margin-top: 16px;
 }
+
 /* liの中のinput要素がcheckされた際に、兄弟要素spanに適用 */
 li input:checked + span {
     color: #aaa;
     text-decoration: line-through;
+}
+
+li input {
+    margin-right: 8px;
+}
+
+li label {
+    margin-right: 8px;
 }
 
 form {
