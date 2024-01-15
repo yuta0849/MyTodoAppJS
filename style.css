@@ -7,7 +7,7 @@ body {
 .container {
     width: 400px;
     /* 上部のみ16px余白 */
-    margin: 16px auto 0;
+    margin: 16px auto;
 }
 
 h1 {

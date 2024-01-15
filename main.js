@@ -53,12 +53,16 @@
     document.querySelector('#add-form').addEventListener('submit', (e) => {
         // formをsubmitしてしまうとデフォルトでリロードされてしまうため、preventDefault()で打ち消し
         e.preventDefault();
+        const input = document.querySelector('#add-form input');
         const todo = {
             // フォーム内のvalue要素をtodoオブジェクトのtitleプロパティに
-            title: document.querySelector('#add-form input').value,
+            title: input.value,
             isCompleted: false,
         };
         renderTodo(todo);
+        input.value = '';
+        input.focus();
+
     });
 
     renderTodos();
