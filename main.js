@@ -27,6 +27,16 @@
             -button
         */
         const input = document.createElement('input');
+        // check時はclickではなくchange
+        input.addEventListener('change',()=>{
+            todos.forEach((item)=>{
+                if(item.id === todo.id){
+                    //isCompeted要素を反転
+                    item.isCompleted = !item.isComplete;
+                }
+                localStorage.setItem('todos', JSON.stringify(todos));
+            });
+        });
         // inputオブジェクトに対するtypeプロパティで属性の指定ができる
         input.type = 'checkbox';
         // inputオブジェクトに対するcheckedプロパティでcheckの有無を設定できる
@@ -47,7 +57,7 @@
             if (!confirm('Sure?')) { //!をつけることでfalse時に実行されるif文となる
                 return;
             };
-            // ボタン押下時、li要素(todo)ごと削除
+            // ボタン押下時、li要素(todo)ごと削除、下記のliは定数
             li.remove();
             // 配列todosからidが合致するもの"以外"を抜き出して配列にし、todosに再代入する
             todos = todos.filter((item)=>{
