@@ -49,6 +49,11 @@
             };
             // ボタン押下時、li要素(todo)ごと削除
             li.remove();
+            // 配列todosからidが合致するもの"以外"を抜き出して配列にし、todosに再代入する
+            todos = todos.filter((item)=>{
+                return item.id !== todo.id;
+            });
+            localStorage.setItem('todos', JSON.stringify(todos));
 
         })
 
