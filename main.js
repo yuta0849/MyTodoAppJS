@@ -108,11 +108,20 @@
     });
 
     document.querySelector('#purge').addEventListener('click', () => {
+        if (!confirm('Sure?')) { 
+            return;
+        };
         todos = todos.filter((todo) => {
             return todo.isCompleted === false;
         });
         saveTodos();
+        //一度全てのli要素を削除
+        document.querySelectorAll('#todos li').forEach((li) => {
+            li.remove();
+        });
+        renderTodos();
     });
 
+    //再度配列todosを参照してli要素を作成
     renderTodos();
 }
