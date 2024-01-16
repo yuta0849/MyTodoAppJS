@@ -1,13 +1,22 @@
 'use strict';
 
 {
+    let todos;
+
+    if (localStorage.getItem('todos') === null) {
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem('todos'));
+    };
+
+
     //todo自体を配列に、ここの配列はtitleとcheckの有無をobjectに
-    const todos = [
-        { title: 'aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa', isCompleted: false },
-        { title: 'bbb', isCompleted: true },
-        { title: 'ccc', isCompleted: false },
-        { title: 'ddd', isCompleted: false },
-    ];
+    // const todos = [
+    //     { title: 'aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa', isCompleted: false },
+    //     { title: 'bbb', isCompleted: true },
+    //     { title: 'ccc', isCompleted: false },
+    //     { title: 'ddd', isCompleted: false },
+    // ];
 
     const renderTodo = (todo) => {
         /*
@@ -67,6 +76,10 @@
             isCompleted: false,
         };
         renderTodo(todo);
+        // 配列todosに新規作成したtodoをpush
+        todos.push(todo);
+        // localStorageを更新
+        localStorage.setItem('todos',JSON.stringify(todo));
         input.value = '';
         input.focus();
 
@@ -76,6 +89,6 @@
 
     // setItemに保存できるのは文字列のみ、配列の場合はJSON.stringifyでJSON形式に変換
     localStorage.setItem('todos', JSON.stringify(todos));
-    // keyに紐づいた値を取得する際はJSON.parseで
+    // keyに紐づいた値を取得する際はJSON.parseで元の配列に戻す
     console.log(JSON.parse(localStorage.getItem('todos')));
 }
