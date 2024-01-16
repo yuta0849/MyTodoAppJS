@@ -73,4 +73,9 @@
     });
 
     renderTodos();
+
+    // setItemに保存できるのは文字列のみ、配列の場合はJSON.stringifyでJSON形式に変換
+    localStorage.setItem('todos', JSON.stringify(todos));
+    // keyに紐づいた値を取得する際はJSON.parseで
+    console.log(JSON.parse(localStorage.getItem('todos')));
 }
