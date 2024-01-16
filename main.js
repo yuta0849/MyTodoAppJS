@@ -49,6 +49,7 @@
             };
             // ボタン押下時、li要素(todo)ごと削除
             li.remove();
+
         })
 
         const li = document.createElement('li');
@@ -71,6 +72,7 @@
         e.preventDefault();
         const input = document.querySelector('#add-form input');
         const todo = {
+            id: Date.now(),
             // フォーム内のvalue要素をtodoオブジェクトのtitleプロパティに
             title: input.value,
             isCompleted: false,
@@ -78,8 +80,9 @@
         renderTodo(todo);
         // 配列todosに新規作成したtodoをpush
         todos.push(todo);
+        console.table(todos);
         // localStorageを更新
-        localStorage.setItem('todos',JSON.stringify(todo));
+        localStorage.setItem('todos', JSON.stringify(todo));
         input.value = '';
         input.focus();
 
