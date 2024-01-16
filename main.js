@@ -9,6 +9,10 @@
         todos = JSON.parse(localStorage.getItem('todos'));
     };
 
+    const saveTodos = () => {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
 
     //todo自体を配列に、ここの配列はtitleとcheckの有無をobjectに
     // const todos = [
@@ -28,13 +32,13 @@
         */
         const input = document.createElement('input');
         // check時はclickではなくchange
-        input.addEventListener('change',()=>{
-            todos.forEach((item)=>{
-                if(item.id === todo.id){
-                    //isCompeted要素を反転
-                    item.isCompleted = !item.isComplete;
+        input.addEventListener('change', () => {
+            todos.forEach((item) => {
+                if (item.id === todo.id) {
+                    //isCompetedプロパティを反転
+                    item.isCompleted = !item.isCompleted;
                 }
-                localStorage.setItem('todos', JSON.stringify(todos));
+                saveTodos();
             });
         });
         // inputオブジェクトに対するtypeプロパティで属性の指定ができる
@@ -60,10 +64,10 @@
             // ボタン押下時、li要素(todo)ごと削除、下記のliは定数
             li.remove();
             // 配列todosからidが合致するもの"以外"を抜き出して配列にし、todosに再代入する
-            todos = todos.filter((item)=>{
+            todos = todos.filter((item) => {
                 return item.id !== todo.id;
             });
-            localStorage.setItem('todos', JSON.stringify(todos));
+            saveTodos();
 
         })
 
@@ -97,16 +101,18 @@
         todos.push(todo);
         console.table(todos);
         // localStorageを更新
-        localStorage.setItem('todos', JSON.stringify(todo));
+        saveTodos();
         input.value = '';
         input.focus();
 
     });
 
-    renderTodos();
+    document.querySelector('#purge').addEventListener('click', () => {
+        todos = todos.filter((todo) => {
+            return todo.isCompleted === false;
+        });
+        saveTodos();
+    });
 
-    // setItemに保存できるのは文字列のみ、配列の場合はJSON.stringifyでJSON形式に変換
-    localStorage.setItem('todos', JSON.stringify(todos));
-    // keyに紐づいた値を取得する際はJSON.parseで元の配列に戻す
-    console.log(JSON.parse(localStorage.getItem('todos')));
+    renderTodos();
 }
